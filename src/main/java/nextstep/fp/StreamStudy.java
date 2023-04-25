@@ -7,6 +7,7 @@ import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class StreamStudy {
 
@@ -26,8 +27,14 @@ public class StreamStudy {
         String contents = new String(Files.readAllBytes(Paths
                 .get("src/main/resources/fp/war-and-peace.txt")), StandardCharsets.UTF_8);
         List<String> words = Arrays.asList(contents.split("[\\P{L}]+"));
-
-        // TODO 이 부분에 구현한다.
+        words.stream()
+                .filter(w -> w.length() > 12)
+                .sorted((w1, w2) -> Integer.compare(w2.length(), w1.length()))
+                .distinct()
+                .limit(100)
+                .map(String::toString)
+                .map(String::toLowerCase)
+                .forEach(System.out::println);
     }
 
     public static List<Integer> doubleNumbers(List<Integer> numbers) {
