@@ -27,33 +27,18 @@ public class Lambda {
     }
 
     public static int sumAll(List<Integer> numbers) {
-        return sumAll(numbers, new AddStrategy() {
-            @Override
-            public boolean isAddable(Integer number) {
-                return true;
-            }
-        });
+        return sum(numbers, (number) -> false);
     }
 
     public static int sumAllEven(List<Integer> numbers) {
-        return sumAll(numbers, new AddStrategy() {
-            @Override
-            public boolean isAddable(Integer number) {
-                return number % 2 == 0;
-            }
-        });
+        return sum(numbers, (number) -> number % 2 == 0);
     }
 
     public static int sumAllOverThree(List<Integer> numbers) {
-        return sumAll(numbers, new AddStrategy() {
-            @Override
-            public boolean isAddable(Integer number) {
-                return number > 3;
-            }
-        });
+        return sum(numbers, (number) -> number > 3);
     }
 
-    public static int sumAll(List<Integer> numbers, AddStrategy addStrategy) {
+    public static int sum(List<Integer> numbers, AddStrategy addStrategy) {
         return numbers.stream().filter(addStrategy::isAddable).reduce(0, Integer::sum);
     }
 }
