@@ -1,8 +1,11 @@
 package blackjack;
 
+import java.util.ArrayList;
+
 public class Player {
     private final String name;
     private Money betting;
+    private final Cards cards= new Cards(new ArrayList<>());
 
     public Player(String name) {
         this.name = name;
@@ -15,5 +18,13 @@ public class Player {
 
     public Money betting() {
         return this.betting;
+    }
+
+    public void draw(Card card) {
+        this.cards.draw(card);
+    }
+
+    public int calculate() {
+        return this.cards.calculate();
     }
 }

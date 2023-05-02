@@ -1,12 +1,13 @@
 package blackjack;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Cards {
-    private final List<Card> cards;
+    private final ArrayList<Card> cards = new ArrayList<>();
 
     public Cards(List<Card> cards) {
-        this.cards = cards;
+        this.cards.addAll(cards);
     }
 
     public int calculate() {
@@ -21,5 +22,9 @@ public class Cards {
             sum = sum + card.aceValue(sum);
         }
         return sum;
+    }
+
+    public void draw(Card card) {
+        this.cards.add(card);
     }
 }
